@@ -33,6 +33,7 @@ ACTION=$DENY_ACTION
 # ---------------------------------------------------------------------------------------- #
 # A simple wrapper to check if the script is being run via the multiplex or not.           #
 # ---------------------------------------------------------------------------------------- #
+
 function in_multiplexer
 {
     [[ "${MUX}" = true ]] && return 0 || return 1;
@@ -43,6 +44,7 @@ function in_multiplexer
 # ---------------------------------------------------------------------------------------- #
 # A simple wrapper to check if the script is being run in a terminal or not.               #
 # ---------------------------------------------------------------------------------------- #
+
 function in_terminal
 {
     [[ -t 1 ]] && return 0 || return 1;
@@ -53,6 +55,7 @@ function in_terminal
 # ---------------------------------------------------------------------------------------- #
 # Show output only if we are running in a terminal.                                        #
 # ---------------------------------------------------------------------------------------- #
+
 function debug()
 {
     local message="${1:-}"
@@ -70,10 +73,11 @@ function debug()
 # ---------------------------------------------------------------------------------------- #
 # A wrapper to check individual results against a given array and deny as required.        #
 # ---------------------------------------------------------------------------------------- #
+
 function check_results()
 {
-    local item=$1
-    local list=$2
+    local item="${1:-}"
+    local list="${2:-}"
 
     #
     # Check the current item and list and decide what action to take
@@ -100,6 +104,7 @@ function check_results()
 # Use GeoipLookup to locate the ASN if possible, if that doesn't block then we have the    #
 # whois failback option.                                                                   #
 # ---------------------------------------------------------------------------------------- #
+
 function handle_geoip_asn_blocks
 {
     #
@@ -142,6 +147,7 @@ function handle_geoip_asn_blocks
 # Lookup ALL ASNs for a given IP, it could have multiple entries, so we need to capture    #
 # all of the entries and test each one to ensure it is not bocked.                         #
 # ---------------------------------------------------------------------------------------- #
+
 function handle_asn_blocks
 {
     #
@@ -167,6 +173,7 @@ function handle_asn_blocks
 # ---------------------------------------------------------------------------------------- #
 # The main function where all of the heavy lifting and script config is done.              #
 # ---------------------------------------------------------------------------------------- #
+
 function main()
 {
     #
@@ -211,6 +218,7 @@ function main()
 # ---------------------------------------------------------------------------------------- #
 # The actual 'script' and the functions/sub routines are called in order.                  #
 # ---------------------------------------------------------------------------------------- #
+
 main "${@}"
 
 # ---------------------------------------------------------------------------------------- #
